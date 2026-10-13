@@ -9,7 +9,6 @@
     min-height:100dvh;
     margin:0 auto;
     background:#101013!important;
-    contain:paint;
   }
   #mobileRoot .m-page-home{
     background:linear-gradient(180deg,#4b234a 0,#431d43 105px,#351d37 292px,#29192d 500px,#27172b 665px,#19131d 890px,#101013 1160px,#101013 100%);
