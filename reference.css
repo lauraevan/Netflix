@@ -98,3 +98,35 @@
  #mobileRoot .m-feature{min-height:395px}
 }
 @media(min-width:761px){#mobileRoot{display:none!important}}
+
+@media(max-width:760px){
+  /* The reference keeps a wine-purple tint behind the first row, not an abrupt black shelf. */
+  #mobileRoot .m-page-home{
+    background:linear-gradient(180deg,#542450 0%,#431b43 88px,#382037 230px,#301b33 410px,#27192d 680px,#121013 920px,#101013 100%);
+  }
+  /* The licensed theatrical key-art has printed release copy in the bottom half.
+     Keep the photographic scene and supply readable live UI controls over it. */
+  #mobileRoot .m-feature[aria-label*="Srikanth"] .m-feature-img{
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 43%,rgba(0,0,0,.83) 48%,rgba(0,0,0,.08) 58%,transparent 63%);
+    mask-image:linear-gradient(to bottom,#000 0%,#000 43%,rgba(0,0,0,.83) 48%,rgba(0,0,0,.08) 58%,transparent 63%);
+    object-position:center top;
+  }
+  #mobileRoot .m-feature[aria-label*="Srikanth"] .m-feature-backup{
+    background:linear-gradient(180deg,#563a4b 0%,#49364d 53%,#261b2d 76%,#19141e 100%);
+  }
+  #mobileRoot .m-feature[aria-label*="Srikanth"]:before{
+    background:linear-gradient(0deg,rgba(13,11,17,.96) 0%,rgba(18,13,23,.67) 17%,rgba(18,13,23,.2) 40%,transparent 62%);
+  }
+  #mobileRoot .m-feature-title{
+    -webkit-text-stroke:.15px #fff;
+    text-shadow:0 2px 8px #130e18bb;
+  }
+  #mobileRoot .m-release-cover{
+    background:linear-gradient(135deg,#353040,#151316);
+  }
+  #mobileRoot .m-preview-n{
+    position:absolute;top:10px;left:11px;z-index:3;width:13px;height:22px;
+    filter:drop-shadow(0 1px 2px #000b);
+  }
+  #mobileRoot .m-release-cover:has(.m-preview-n) .m-trailer-label{left:32px}
+}
