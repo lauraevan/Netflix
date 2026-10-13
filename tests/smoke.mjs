@@ -31,6 +31,15 @@ try {
   const mobile = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
   await mobile.route("https://api.themoviedb.org/**", route => route.abort());
   await mobile.goto("http://127.0.0.1:8765/", { waitUntil: "domcontentloaded" });
+  assert.equal(await mobile.locator("#profileCards .profile-choice").count(),7,"All seven uploaded profiles must be available");
+  await mobile.screenshot({ path:"mobile-profiles.png", fullPage:false });
+  await mobile.locator("#manageProfiles").click();
+  await mobile.locator('[data-profile="one"]').click();
+  assert(await mobile.locator(".native-profile-edit").isVisible(),"Native profile editor missing");
+  await mobile.locator('[data-native-avatar="4"]').click();
+  await mobile.locator("#nativeProfileName").fill("Evan");
+  await mobile.locator("[data-native-save]").click();
+  await mobile.locator("#manageProfiles").click();
   await mobile.locator('[data-profile="one"]').click();
   assert(await mobile.locator("#mobileRoot .m-feature").isVisible(), "Mobile featured portrait card missing");
   await mobile.waitForTimeout(1200);
@@ -50,8 +59,10 @@ try {
   await mobile.locator("#mSearchInput").fill("Stranger");
   assert((await mobile.locator("#mSearchResults .m-poster").count()) >= 1, "Mobile search missing");
   await mobile.locator("#mSearchResults .m-poster").first().click();
-  assert(await mobile.locator("#detailsModal").isVisible(), "Mobile title details missing");
-  await mobile.locator("#modalPlay").click();
+  assert(await mobile.locator(".native-details").isVisible(), "Native mobile title details missing");
+  assert(!await mobile.locator("#detailsModal").isVisible(),"Legacy desktop modal must never open on phones");
+  await mobile.screenshot({ path:"mobile-details.png", fullPage:false });
+  await mobile.locator("[data-native-play]").click();
   assert(await mobile.locator("#playerSetup").isVisible(), "Mobile EvanPlayer handoff missing");
   await mobile.locator("#playerBack").click();
   await mobile.screenshot({ path: "mobile-smoke.png", fullPage: false });
