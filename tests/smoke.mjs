@@ -59,6 +59,7 @@ try {
   assert(await mobile.locator(".m-pagehead, .m-headtitle").filter({ hasText:"New & Hot" }).count() >= 1, "New & Hot tab missing");
   await mobile.locator('[data-m-news="watching"]').click();
   assert(await mobile.locator(".m-release").count() >= 1, "New & Hot catalog missing");
+  await mobile.waitForTimeout(1100);
   await mobile.screenshot({ path: "mobile-newhot.png", fullPage: false });
   await mobile.locator('[data-m-tab="home"]').click();
   await mobile.locator('[data-m-action="search"]').first().click();
