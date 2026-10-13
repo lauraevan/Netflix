@@ -21,3 +21,8 @@
 @media(max-width:700px){.hero-logo{max-height:132px;max-width:89%;margin:12px 0 16px}.episode-thumb{width:110px}}
 
 .wordmark{position:relative}.wordmark-image{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;display:block;background:transparent}
+
+/* Make the true wordmark the visible layer rather than superimposing two logos. */
+.wordmark:has(.wordmark-image:not([hidden])){font-size:0;letter-spacing:0;transform:none}
+.wordmark .wordmark-image{position:static;inset:auto;width:112px;height:auto;max-height:34px;object-fit:contain;object-position:left center}
+.profiles-brand.wordmark .wordmark-image{width:130px;max-height:43px}
