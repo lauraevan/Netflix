@@ -6,10 +6,13 @@
   var TMDB = "https://api.themoviedb.org/3";
   var IMG = "https://image.tmdb.org/t/p/";
   var profiles = [
-    {id:"one", name:"Evan", color:"blue"},
-    {id:"two", name:"Guest", color:"orange"},
-    {id:"three", name:"Kids", color:"purple"},
-    {id:"four", name:"Profile 4", color:"teal"}
+    {id:"one", name:"Evan", avatar:0},
+    {id:"two", name:"Guest", avatar:1},
+    {id:"three", name:"Finn", avatar:2},
+    {id:"four", name:"Iron Man", avatar:3},
+    {id:"five", name:"Gunter", avatar:4},
+    {id:"six", name:"Smiley", avatar:5},
+    {id:"seven", name:"Red", avatar:6}
   ];
   var state = {profile:null,view:"home",search:"",modal:null,hero:null,locale:"all",live:{},lists:new Set(),likes:new Set(),recent:[],manage:false,playerSelection:null};
   var fallback = [
@@ -47,11 +50,11 @@
   function dataKey(s){return "nf-" + s + "-" + state.profile;}
   function persist(){if(!state.profile)return;localStorage.setItem(dataKey("list"),JSON.stringify(Array.from(state.lists)));localStorage.setItem(dataKey("likes"),JSON.stringify(Array.from(state.likes)));localStorage.setItem(dataKey("recent"),JSON.stringify(state.recent));}
   function restore(){state.lists=new Set(parseJson(localStorage.getItem(dataKey("list")),[]));state.likes=new Set(parseJson(localStorage.getItem(dataKey("likes")),[]));state.recent=parseJson(localStorage.getItem(dataKey("recent")),[]);}
-  function avatar(profile){var face='<svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="29" r="15" fill="#fff"/><path d="M6 80c1-23 14-33 34-33s33 10 34 33" fill="#fff"/></svg>';return '<span class="avatar '+esc(profile.color)+'">'+face+'</span>';}
-  function getProfiles(){return parseJson(localStorage.getItem("nf-profiles"),profiles);}
+  function avatar(profile){var index=Math.max(0,Math.min(6,Number(profile.avatar)||0));return '<span class="avatar avatar-art" role="img" aria-label="'+esc(profile.name)+' avatar" style="background-position:'+(index*100/6).toFixed(5)+'% center"></span>';}
+  function getProfiles(){var saved=parseJson(localStorage.getItem("nf-profiles"),[]);if(!Array.isArray(saved))saved=[];return profiles.map(function(base){var previous=saved.find(function(p){return p.id===base.id;});return Object.assign({},base,previous||{},{avatar:base.avatar});});}
   function profileScreen(){var list=getProfiles();$("profileCards").innerHTML=list.map(function(p){return '<button class="profile-choice" data-profile="'+esc(p.id)+'">'+avatar(p)+'<span>'+esc(p.name)+'</span></button>';}).join("");$("profilesScreen").hidden=false;$("site").hidden=true;$("playerShell").hidden=true;document.body.classList.add("locked");$("manageProfiles").textContent=state.manage?"Done":"Manage Profiles";}
   function setProfile(id){var p=getProfiles().find(function(x){return x.id===id;});if(!p)return;if(state.manage){var name=prompt("Profile name",p.name);if(name&&name.trim()){var arr=getProfiles();arr.find(function(x){return x.id===id;}).name=name.trim().slice(0,30);localStorage.setItem("nf-profiles",JSON.stringify(arr));profileScreen();}return;}
-    state.profile=id;localStorage.setItem("nf-current-profile",id);restore();$("currentAvatar").outerHTML='<span id="currentAvatar" class="avatar '+esc(p.color)+'">'+avatar(p).replace(/^<span[^>]*>|<\/span>$/g,"")+'</span>';$("profilesScreen").hidden=true;$("site").hidden=false;document.body.classList.remove("locked");$("accountPopover").hidden=true;renderSwitcher();render();window.scrollTo(0,0);}
+    state.profile=id;localStorage.setItem("nf-current-profile",id);restore();$("currentAvatar").outerHTML=avatar(p).replace('class="avatar ', 'id="currentAvatar" class="avatar ');$("profilesScreen").hidden=true;$("site").hidden=false;document.body.classList.remove("locked");$("accountPopover").hidden=true;renderSwitcher();render();window.scrollTo(0,0);}
   function renderSwitcher(){var choices=getProfiles().filter(function(p){return p.id!==state.profile;});$("profileSwitchItems").innerHTML=choices.map(function(p){return '<button data-switch="'+esc(p.id)+'">'+avatar(p)+' '+esc(p.name)+'</button>';}).join("");}
   function normalize(raw,forced){if(!raw||!raw.id)return null;var type=forced || raw.media_type || (raw.title?"movie":"tv");if(type!=="movie"&&type!=="tv")return null;var name=raw.title||raw.name;var d=raw.release_date||raw.first_air_date||"";if(!name)return null;return {id:raw.id,type:type,name:name,year:Number(d.slice(0,4))||0,age:type==="movie"?"PG-13":"TV-MA",rating:Number(raw.vote_average)||0,language:raw.original_language||"en",genres:[],poster:raw.poster_path||"",backdrop:raw.backdrop_path||"",overview:raw.overview||""};}
   function addItems(items){(items||[]).forEach(function(x){if(x&&x.id&&x.name){var old=catalog.get(key(x));catalog.set(key(x),old?Object.assign({},old,x,{genres:old.genres||x.genres}):x);}});}
