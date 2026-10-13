@@ -1,0 +1,100 @@
+/* Reference-locked mobile Netflix composition.
+   Target: user-supplied four-phone UI reference, especially phone 3 (Home)
+   and phones 2/4 (New & Hot). All changes are mobile-only. */
+@media(max-width:760px){
+  :root{--nf-black:#101013;--nf-light:#f6f6f8}
+  html,body{background:#0d0d0f!important}
+  #mobileRoot{background:#0d0d0f!important;color:#fff!important;padding-bottom:calc(102px + env(safe-area-inset-bottom,0px))}
+  #mobileRoot .m-page{animation:none}
+  #mobileRoot .m-page-home{
+    background:linear-gradient(180deg,#492148 0px,#3e1b3e 79px,#201622 166px,#111113 274px,#101013 370px,#101013 100%);
+  }
+  #mobileRoot .m-header{padding:calc(36px + env(safe-area-inset-top,0px)) 16px 0;z-index:3}
+  #mobileRoot .m-headrow{height:45px}
+  #mobileRoot .m-wordmark{display:flex;align-items:center;justify-content:flex-start;padding:0;transform:none;width:25px;height:37px;font-size:0;letter-spacing:0}
+  #mobileRoot .m-netflix-n{display:block;width:22px;height:34px;object-fit:contain}
+  #mobileRoot .m-headright{gap:0}
+  #mobileRoot .m-header-btn{width:32px;height:34px;padding:3px}
+  #mobileRoot .m-header-btn .icon{width:24px;height:24px;stroke-width:1.8}
+  #mobileRoot .m-filterheader{padding:0 15px!important}
+  #mobileRoot .m-filterbar{display:flex;align-items:center;gap:8px;padding:0;overflow:visible;margin:10px 0 15px;height:33px}
+  #mobileRoot .m-filter{font-size:12px;font-weight:500;min-height:31px;height:31px;padding:0 13px;border:1px solid #c1aebc8c;background:rgba(26,20,26,.17);border-radius:22px;letter-spacing:0}
+  #mobileRoot .m-filter.active{background:#f0eef0;color:#0e0e0f;border-color:#e6e6e6}
+  #mobileRoot .m-filter svg{width:13px;height:13px}
+  #mobileRoot .m-feature{
+    height:min(calc((100vw - 27px)*1.30),550px);
+    min-height:420px;
+    max-height:550px;
+    margin:0 13px;
+    border:1px solid #a895a77d;
+    border-radius:11px;
+    background:#27242a;
+    box-shadow:none;
+  }
+  #mobileRoot .m-feature-img{object-position:50% 20%;transform:scale(1.02)}
+  #mobileRoot .m-feature:before{background:linear-gradient(0deg,#100b12 0%,rgba(15,11,16,.90) 6%,rgba(15,11,16,.52) 20%,rgba(15,11,16,.03) 43%,transparent 61%)}
+  #mobileRoot .m-feature-top{font-size:10px;color:#ddd;letter-spacing:2px}
+  #mobileRoot .m-card-n{width:13px;height:23px;margin-right:4px;vertical-align:middle}
+  #mobileRoot .m-feature-bottom{left:12px;right:12px;bottom:11px}
+  #mobileRoot .m-feature-title{font-size:clamp(26px,7.5vw,36px);letter-spacing:6px;font-weight:850;line-height:1.08;text-align:center;margin:0 0 11px;max-width:100%;overflow-wrap:break-word;text-shadow:0 2px 10px #000e}
+  #mobileRoot .m-feature-logo{max-height:83px;margin-bottom:9px}
+  #mobileRoot .m-feature-rank{margin:0 0 9px;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px;color:white}
+  #mobileRoot .m-rank-symbol{background:#e50914;font-weight:900;line-height:1.05;font-size:8px;padding:1px 3px}
+  #mobileRoot .m-feature-tags{display:none}
+  #mobileRoot .m-feature-actions{width:100%;gap:8px;margin-top:2px}
+  #mobileRoot .m-cta{min-height:39px;height:39px;border-radius:4px;font-size:14px;font-weight:700;gap:6px}
+  #mobileRoot .m-cta svg{width:19px;height:19px;stroke-width:1.9}
+  #mobileRoot .m-cta-play{background:#f5f5f5;color:#121212}
+  #mobileRoot .m-cta-list{background:#41343fbf;color:white}
+  #mobileRoot .m-content{padding:25px 0 6px}
+  #mobileRoot .m-shelf{margin-bottom:19px}
+  #mobileRoot .m-shelf-heading{margin:0 15px 8px}
+  #mobileRoot .m-shelf h2{font-size:17px;line-height:1.2;letter-spacing:-.35px;font-weight:780}
+  #mobileRoot .m-shelf-next{display:none}
+  #mobileRoot .m-shelf-items{padding:0 15px 9px;gap:6px}
+  #mobileRoot .m-poster{flex-basis:108px;width:108px;border-radius:3px}
+  #mobileRoot .m-poster img{height:156px}
+  #mobileRoot .m-bottom{
+    height:calc(85px + env(safe-area-inset-bottom,0px));
+    min-height:85px;
+    padding:11px 0 calc(17px + env(safe-area-inset-bottom,0px));
+    background:linear-gradient(180deg,#151516f5,#101011 44%);
+    backdrop-filter:blur(24px);
+    border-top:0;
+    box-shadow:none;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+  }
+  #mobileRoot .m-tab{justify-content:center;gap:4px;font-size:10px;font-weight:550;color:#858589}
+  #mobileRoot .m-tab.active{color:#fff}
+  #mobileRoot .m-tab svg{height:24px;width:24px;stroke-width:1.9}
+  #mobileRoot .m-tab .m-avatar.avatar-art{height:23px;width:23px;border-radius:3px}
+  #mobileRoot .m-tab.active:before{display:none}
+  /* New & Hot matches the reference's dense black feed and oval top filters. */
+  #mobileRoot .m-tabpage{padding-top:0;background:#090909}
+  #mobileRoot .m-tabpage .m-header{padding:calc(37px + env(safe-area-inset-top,0px)) 15px 0}
+  #mobileRoot .m-headtitle{font-size:21px;font-weight:750;letter-spacing:-.6px}
+  #mobileRoot .m-subtabs{padding:0 15px 13px;display:flex;gap:8px;align-items:center;overflow-x:auto}
+  #mobileRoot .m-subtab{flex:none;border-radius:22px;border:1px solid #68686b;background:#151517;color:#f5f5f5;font-size:12px;font-weight:650;padding:7px 13px;min-height:32px;white-space:nowrap}
+  #mobileRoot .m-subtab.active{border-color:#fff;background:#f6f6f6;color:#0a0a0a}
+  #mobileRoot .m-release{display:grid;grid-template-columns:37px minmax(0,1fr);gap:6px;margin:0 12px 28px 8px}
+  #mobileRoot .m-release-date{font-size:11px;line-height:1.2;text-align:left;padding-top:8px;color:#b1b1b5}
+  #mobileRoot .m-release-date strong{font-size:27px;font-weight:800;color:#fff}
+  #mobileRoot .m-release-cover{border-radius:4px;aspect-ratio:1.72;background:#111}
+  #mobileRoot .m-release-cover .m-trailer-label{font-size:10px;top:7px;left:8px;letter-spacing:1px}
+  #mobileRoot .m-release-details{padding-top:10px}
+  #mobileRoot .m-release-title{font-size:21px;line-height:1.05;letter-spacing:-.65px}
+  #mobileRoot .m-release-actions{gap:15px}
+  #mobileRoot .m-small-action{font-size:9px;color:#ddd}
+  #mobileRoot .m-release-soon{font-size:13px;font-weight:730;margin:13px 0 6px}
+  #mobileRoot .m-release-overview{font-size:12px;line-height:1.48;max-width:100%;color:#999}
+  #mobileRoot .m-release-tags{font-size:11px;color:#b2b2b4}
+  #mobileRoot .m-myn-page{padding-top:calc(35px + env(safe-area-inset-top,0px))}
+  #mobileRoot .m-search-page{padding-top:calc(42px + env(safe-area-inset-top,0px))}
+  #mobileRoot .m-feature[aria-label*="Srikanth"] .m-feature-title{font-size:29px;letter-spacing:6px}
+}
+@media(max-width:360px){
+ #mobileRoot .m-feature-title{letter-spacing:3px}
+ #mobileRoot .m-feature[aria-label*="Srikanth"] .m-feature-title{font-size:27px;letter-spacing:4px}
+ #mobileRoot .m-feature{min-height:395px}
+}
+@media(min-width:761px){#mobileRoot{display:none!important}}
