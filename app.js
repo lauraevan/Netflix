@@ -82,7 +82,7 @@
     var filters=view==="languages"?'<div class="language-row">'+[["all","All Languages"],["en","English"],["ko","Korean"],["es","Spanish"],["ja","Japanese"],["hi","Hindi"],["de","German"]].map(function(row){return '<button class="language-btn'+(state.locale===row[0]?" selected":"")+'" data-language="'+row[0]+'">'+row[1]+'</button>';}).join("")+'</div>':"";
     $("browseView").innerHTML='<h1>'+esc(heading)+'</h1>'+filters+(items.length?'<div class="browse-grid">'+items.map(function(x){return titleTile(x,0);}).join("")+'</div>':'<div class="empty">'+(view==="list"?"Titles you add to My List will appear here.":"No titles found. Try another search.")+'</div>');
   }
-  function render(){if(!state.profile)return;document.querySelectorAll("[data-nav]").forEach(function(btn){btn.classList.toggle("active",btn.dataset.nav===state.view);});if(state.view==="home")renderHome();else browsePage();$("header").classList.toggle("scrolled",window.scrollY>30);}
+  function render(){if(!state.profile)return;document.querySelectorAll("[data-nav]").forEach(function(btn){btn.classList.toggle("active",btn.dataset.nav===state.view);});if(state.view==="home")renderHome();else browsePage();$("header").classList.toggle("scrolled",window.scrollY>30);if(window.NetflixMobile)window.NetflixMobile.refresh();}
   function go(view){state.view=view||"home";$("mobileMenu").hidden=true;$("accountPopover").hidden=true;document.querySelectorAll(".nav button").forEach(function(b){b.classList.toggle("active",b.dataset.nav===view);});if(location.hash!=="#"+view)history.replaceState(null,"","#"+view);window.scrollTo({top:0,behavior:"instant"});render();}
   function formatGenre(x){if(Array.isArray(x.genres))return x.genres.map(function(g){return typeof g==="string"?g:g.name;}).join(", ");return x.genres||"Drama, Entertainment";}
   function modalContents(item){$("modalTitle").textContent=item.name;$("modalBrand").innerHTML='<span class="n">N</span> '+(item.type==="tv"?"SERIES":"FILM");
@@ -172,6 +172,24 @@
   document.addEventListener("click",function(e){if(!e.target.closest(".account")){$("accountPopover").hidden=true;$("accountButton").setAttribute("aria-expanded","false");}});
   window.addEventListener("scroll",function(){$("header").classList.toggle("scrolled",window.scrollY>35);},{passive:true});
   window.addEventListener("hashchange",function(){var view=location.hash.slice(1);if(["home","tv","movie","new","list","languages"].includes(view)&&view!==state.view)go(view);});
+  // Shared catalog/actions for the standalone mobile Netflix app surface.
+  window.NetflixUI = {
+    state:state,
+    catalog:catalog,
+    key:key,
+    safeImage:safeImage,
+    getProfiles:getProfiles,
+    openModal:openModal,
+    closeModal:closeModal,
+    startPlayback:startPlayback,
+    persist:persist,
+    profileScreen:profileScreen,
+    go:go,
+    api:api,
+    normalize:normalize,
+    addItems:addItems,
+    render:render
+  };
   // Startup: show actual app UI, never a welcome/marketing page.
   addItems(fallback);state.hero=fallback[0];state.view=["home","tv","movie","new","list","languages"].includes(location.hash.slice(1))?location.hash.slice(1):"home";
   var remembered=localStorage.getItem("nf-current-profile");
