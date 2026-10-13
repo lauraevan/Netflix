@@ -107,8 +107,8 @@
   /* The licensed theatrical key-art has printed release copy in the bottom half.
      Keep the photographic scene and supply readable live UI controls over it. */
   #mobileRoot .m-feature[aria-label*="Srikanth"] .m-feature-img{
-    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 43%,rgba(0,0,0,.83) 48%,rgba(0,0,0,.08) 58%,transparent 63%);
-    mask-image:linear-gradient(to bottom,#000 0%,#000 43%,rgba(0,0,0,.83) 48%,rgba(0,0,0,.08) 58%,transparent 63%);
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 44%,rgba(0,0,0,.66) 48%,rgba(0,0,0,.04) 53%,transparent 56%);
+    mask-image:linear-gradient(to bottom,#000 0%,#000 44%,rgba(0,0,0,.66) 48%,rgba(0,0,0,.04) 53%,transparent 56%);
     object-position:center top;
   }
   #mobileRoot .m-feature[aria-label*="Srikanth"] .m-feature-backup{
