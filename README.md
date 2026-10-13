@@ -10,6 +10,16 @@ An interactive replica of the modern Netflix desktop browsing experience, connec
 - TMDB-backed metadata, dynamic artwork, season/episode lists, with a curated offline fallback catalog
 - EvanPlayer integration via movie and series ID, including specific seasons and episodes
 
+## Mobile app overhaul (October 2026)
+
+- All seven uploaded cartoon profile images are bundled locally in `assets/profile-sprite.webp` (no hotlinks).
+- First-run profile chooser and editable profile names/avatar selections; account selection persists per browser.
+- Phone layout is a dedicated fullscreen app surface, not a responsive desktop navigation frame.
+- Home, Search, New & Hot and My Netflix have distinct working screens and a fixed safe-area-aware tab bar.
+- Tapping artwork opens `native.js` fullscreen mobile details and episode browsing, not the desktop details modal.
+- The site has a standalone web-app manifest so it can open from a phone home screen without browser chrome where the browser supports it.
+- Desktop remains supported separately. The Netflix frontend is statically served; EvanPlayer streaming still requires a separately hosted backend.
+
 ## Local preview
 
 Requires only a static HTTP server:
