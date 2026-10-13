@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#141414">
+<meta name="color-scheme" content="dark">
+<title>Netflix</title>
+<link rel="preconnect" href="https://image.tmdb.org">
+<link rel="stylesheet" href="styles.css">
+<script defer src="config.js"></script>
+<script defer src="app.js"></script>
+</head>
+<body>
+<svg class="defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+<symbol id="play" viewBox="0 0 24 24"><path d="m7 3 14 9-14 9z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/></symbol>
+<symbol id="plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16"/></symbol>
+<symbol id="check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+<symbol id="search" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="7.2"/><path d="m16 16 5 5"/></symbol>
+<symbol id="bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></symbol>
+<symbol id="down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+<symbol id="left" viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></symbol>
+<symbol id="right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+<symbol id="close" viewBox="0 0 24 24"><path d="M5 5 19 19M19 5 5 19"/></symbol>
+<symbol id="mute" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4V5Zm5 4 5 6m0-6-5 6"/></symbol>
+<symbol id="thumb" viewBox="0 0 24 24"><path d="M7 10v11H3V10h4Zm0 0 5-8 2 1v6h6l1 3-3 9H7"/></symbol>
+<symbol id="pencil" viewBox="0 0 24 24"><path d="m3 17 13-13 4 4L7 21H3v-4Zm11-11 4 4"/></symbol>
+</svg>
+<section id="profilesScreen" class="profiles" hidden>
+  <div class="profiles-brand wordmark">NETFLIX</div>
+  <div class="profiles-center"><h1>Who's watching?</h1><div class="profile-grid" id="profileCards"></div><button id="manageProfiles" class="manage-btn">Manage Profiles</button></div>
+</section>
+<div id="site" hidden>
+<header id="header" class="header">
+  <div class="header-left"><a href="#home" class="wordmark" aria-label="Netflix Home">NETFLIX</a>
+    <button id="mobileBrowse" class="mobile-browse">Browse <svg class="icon"><use href="#down"/></svg></button>
+    <nav id="nav" class="nav" aria-label="Browse"><button data-nav="home" class="active">Home</button><button data-nav="tv">TV Shows</button><button data-nav="movie">Movies</button><button data-nav="new">New &amp; Popular</button><button data-nav="list">My List</button><button data-nav="languages">Browse by Languages</button></nav>
+  </div>
+  <div class="header-right">
+    <div class="search-control" id="searchControl"><button id="searchToggle" class="icon-btn" aria-label="Search"><svg class="icon"><use href="#search"/></svg></button><input id="searchInput" type="search" placeholder="Titles, people, genres" aria-label="Search titles" autocomplete="off"></div>
+    <span class="kids-link">Kids</span><button id="bellButton" class="icon-btn" aria-label="Notifications"><svg class="icon"><use href="#bell"/></svg></button>
+    <div class="account"><button id="accountButton" class="account-button" aria-label="Profiles" aria-expanded="false"><span id="currentAvatar" class="avatar blue"></span><svg class="icon account-arrow"><use href="#down"/></svg></button><div class="account-popover" id="accountPopover" hidden><div id="profileSwitchItems"></div><div class="popover-divider"></div><button id="profileExit">Exit Profile</button></div></div>
+  </div>
+  <div id="mobileMenu" class="mobile-menu" hidden><button data-nav="home">Home</button><button data-nav="tv">TV Shows</button><button data-nav="movie">Movies</button><button data-nav="new">New &amp; Popular</button><button data-nav="list">My List</button></div>
+</header>
+<main id="main">
+<section id="hero" class="hero">
+  <div id="heroBackdrop" class="hero-backdrop"></div>
+  <div class="hero-content">
+    <div id="heroType" class="eyebrow"><span class="n">N</span> SERIES</div>
+    <h1 id="heroTitle">STRANGER<br>THINGS</h1>
+    <p id="heroLabel" class="hero-label">A Netflix Series</p>
+    <p id="heroDescription" class="hero-description">When a young boy vanishes, a small town uncovers a mystery involving secret experiments and terrifying supernatural forces.</p>
+    <div class="hero-actions"><button id="heroPlay" class="button play-button"><svg class="icon"><use href="#play"/></svg> Play</button><button id="heroInfo" class="button info-button"><svg class="icon"><use href="#info"/></svg> More Info</button></div>
+  </div>
+  <div class="hero-side"><button id="heroMute" class="mute-btn" aria-label="Mute preview"><svg class="icon"><use href="#mute"/></svg></button><div id="heroMaturity" class="maturity">TV-MA</div></div>
+</section>
+<div id="rails" class="rails"></div>
+<div id="browseView" class="browse" hidden></div>
+<footer class="footer"><div class="footer-social">N</div><div class="footer-columns"><span>Audio Description</span><span>Help Center</span><span>Gift Cards</span><span>Media Center</span><span>Investor Relations</span><span>Jobs</span><span>Terms of Use</span><span>Privacy</span><span>Legal Notices</span><span>Cookie Preferences</span><span>Corporate Information</span><span>Contact Us</span></div><div class="footer-bottom">Private frontend prototype · EvanPlayer</div></footer>
+</main>
+</div>
+<div class="modal-overlay" id="modalOverlay" hidden><section id="detailsModal" class="details" role="dialog" aria-label="Title details" aria-modal="true">
+  <button id="modalClose" class="round close-button" aria-label="Close"><svg class="icon"><use href="#close"/></svg></button>
+  <div id="modalArt" class="modal-art"></div>
+  <div class="modal-body"><div id="modalBrand" class="eyebrow"><span class="n">N</span> SERIES</div><h2 id="modalTitle"></h2>
+  <div class="modal-actions"><button id="modalPlay" class="button play-button"><svg class="icon"><use href="#play"/></svg> Play</button><button id="modalList" class="round" aria-label="Add to My List"><svg class="icon"><use href="#plus"/></svg></button><button id="modalLike" class="round" aria-label="Like"><svg class="icon"><use href="#thumb"/></svg></button></div>
+  <div class="modal-columns"><div><div id="modalMeta" class="modal-meta"></div><p id="modalDescription"></p></div><div id="modalGenres" class="genres"></div></div>
+  <div id="episodeSection" class="episode-section" hidden><div class="episode-heading"><h3>Episodes</h3><select id="seasonSelect" aria-label="Season"></select></div><div id="episodeList"></div></div>
+  <section class="similar-section"><h3>More Like This</h3><div id="similarGrid" class="similar-grid"></div></section>
+  <div id="aboutSection" class="about"></div>
+  </div></section></div>
+<section id="playerShell" class="player-shell" hidden>
+  <button id="playerBack" class="player-back" aria-label="Back to browse"><svg class="icon"><use href="#left"/></svg> <span>Back to Browse</span></button>
+  <iframe id="playerFrame" title="EvanPlayer video" allow="autoplay; fullscreen; picture-in-picture; encrypted-media"></iframe>
+  <div id="playerSetup" class="player-setup" hidden><div class="setup-card"><strong class="setup-n">N</strong><h2>Connect EvanPlayer</h2><p>The browser preview needs your running EvanPlayer server address before playback can begin.</p><label for="backendUrl">EvanPlayer backend URL</label><input id="backendUrl" type="url" placeholder="https://your-player.example"><button id="saveBackend" class="button play-button">Connect &amp; Play</button><p id="backendError" class="setup-error" role="alert"></p></div></div>
+</section>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
