@@ -11,6 +11,8 @@ try {
   await page.locator('[data-profile="one"]').click();
   assert(await page.locator("#hero").isVisible(), "Homepage hero missing");
   assert((await page.locator(".rail").count()) >= 6, "Catalog rows missing");
+  await page.waitForTimeout(1500);
+  await page.screenshot({ path: "desktop-home.png", fullPage: false });
   await page.locator("#heroInfo").click();
   assert(await page.locator("#detailsModal").isVisible(), "Details overlay missing");
   await page.locator("#modalList").click();
@@ -31,6 +33,8 @@ try {
   await mobile.goto("http://127.0.0.1:8765/", { waitUntil: "domcontentloaded" });
   await mobile.locator('[data-profile="one"]').click();
   assert(await mobile.locator("#hero").isVisible(), "Mobile hero missing");
+  await mobile.waitForTimeout(1200);
+  await mobile.screenshot({ path: "mobile-home.png", fullPage: false });
   await mobile.locator("#mobileBrowse").click();
   assert(await mobile.locator("#mobileMenu").isVisible(), "Mobile browse menu missing");
   await mobile.locator('#mobileMenu [data-nav="movie"]').click();
