@@ -42,6 +42,18 @@ try {
   await mobile.locator("#manageProfiles").click();
   await mobile.locator('[data-profile="one"]').click();
   assert(await mobile.locator("#mobileRoot .m-feature").isVisible(), "Mobile featured portrait card missing");
+  const frame=await mobile.locator("#mobileRoot .m-feature").boundingBox();
+  assert(frame && Math.abs(frame.x-31)<4 && Math.abs(frame.y-153)<8
+    && Math.abs(frame.width-322)<5 && Math.abs(frame.height-470)<9,
+    "Home artwork geometry drifted from reference: "+JSON.stringify(frame));
+  const photo=mobile.locator(".m-feature .m-feature-img");
+  assert(await photo.evaluate(img => img.complete && img.naturalWidth>0 &&
+    img.currentSrc.includes("srikanth-reference.webp")),
+    "Reference hero photo must load from the local repo asset");
+  const navBox=await mobile.locator(".m-bottom").boundingBox();
+  assert(navBox && Math.abs(navBox.y-746)<7,
+    "Bottom tab bar has drifted from the reference: "+JSON.stringify(navBox));
+
   assert(await mobile.locator('.m-feature').getAttribute('aria-label') === 'Featured: Srikanth', "Reference featured title should be Srikanth");
   assert((await mobile.locator('img.m-netflix-n').count())===1, "Use the local Netflix N vector, not an italic text substitute");
   const posterLoaded = await mobile.locator('.m-feature-img').evaluate(img => img.complete && img.naturalWidth > 0).catch(()=>false);
