@@ -8,8 +8,10 @@
 <title>Netflix</title>
 <link rel="preconnect" href="https://image.tmdb.org">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="mobile.css">
 <script defer src="config.js"></script>
 <script defer src="app.js"></script>
+<script defer src="mobile.js"></script>
 </head>
 <body>
 <svg class="defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -32,6 +34,7 @@
   <div class="profiles-center"><h1>Who's watching?</h1><div class="profile-grid" id="profileCards"></div><button id="manageProfiles" class="manage-btn">Manage Profiles</button></div>
 </section>
 <div id="site" hidden>
+<div id="mobileRoot" aria-label="Netflix mobile app"></div>
 <header id="header" class="header">
   <div class="header-left"><a href="#home" class="wordmark" aria-label="Netflix Home">NETFLIX<img class="wordmark-image" src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="" onerror="this.hidden=true"></a>
     <button id="mobileBrowse" class="mobile-browse">Browse <svg class="icon"><use href="#down"/></svg></button>
