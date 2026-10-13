@@ -33,10 +33,10 @@
  function tabs(){var parts=[
  ["home","Home",'<path d="m3 11 9-8 9 8v10h-7v-7h-4v7H3Z"/>'],
  ["games","Games",'<rect x="3" y="8" width="18" height="11" rx="5"/><path d="M7 13h5m-2.5-2.5v5M16 12h.1M18 15h.1"/>'],
- ["hot","New & Hot",'<path d="M12 22c-5 0-8-4-8-8 0-4 4-8 6-11 0 5 2 6 3 7 1-2 2-4 2-6 4 4 5 7 5 10 0 4-3 8-8 8Z"/>'],
+ ["hot","New & Hot",'<rect x="4" y="5" width="16" height="15" rx="2"/><path d="m10 9 6 3.5-6 3.5V9Z"/><path d="M7 2h10"/>'],
  ["my","My Netflix",null]
  ];
- return '<nav class="m-bottom" aria-label="Netflix mobile navigation">'+parts.map(function(p){var symbol=p[2]?'<svg viewBox="0 0 24 24" class="icon" aria-hidden="true" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none">'+p[2]+'</svg>':face();return '<button class="m-tab'+(screen.tab===p[0]?" active":"")+'" data-m-tab="'+p[0]+'" aria-current="'+(screen.tab===p[0]?"page":"false")+'">'+symbol+'<span>'+p[1]+'</span></button>';}).join("")+'</nav>';
+ return '<nav class="m-bottom" aria-label="Netflix mobile navigation">'+parts.map(function(p){var glyph=(p[0]==="home"&&screen.tab==="home")?'<path d="m3 11 9-8 9 8v10h-7v-7h-4v7H3Z" fill="currentColor" stroke="none"/>':p[2];var symbol=glyph?'<svg viewBox="0 0 24 24" class="icon" aria-hidden="true" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" fill="none">'+glyph+'</svg>':face();return '<button class="m-tab'+(screen.tab===p[0]?" active":"")+'" data-m-tab="'+p[0]+'" aria-current="'+(screen.tab===p[0]?"page":"false")+'">'+symbol+'<span>'+p[1]+'</span></button>';}).join("")+'</nav>';
  }
  function home(){var feature=selectedFeature();if(!feature)return "";var all=items(),shows=all.filter(function(x){return x.type==="tv";}),movies=all.filter(function(x){return x.type==="movie";});
  var curated=unique([].concat(source.state.live.trending||[],source.state.live.netflixTv||[],shows,movies));
