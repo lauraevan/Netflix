@@ -11,6 +11,7 @@ jobs:
         run: |
           node --check app.js
           node --check mobile.js
+          node --check native.js
           node --check config.js
           node --check tests/smoke.mjs
       - name: Check GitHack beta address
@@ -59,6 +60,8 @@ jobs:
           path: |
             desktop-home.png
             mobile-home.png
+            mobile-profiles.png
+            mobile-details.png
             mobile-newhot.png
             mobile-mynetflix.png
             desktop-smoke.png
