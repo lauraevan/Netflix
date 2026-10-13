@@ -45,6 +45,8 @@ jobs:
         with:
           name: frontend-smoke-screenshots
           path: |
+            desktop-home.png
+            mobile-home.png
             desktop-smoke.png
             mobile-smoke.png
           if-no-files-found: ignore
