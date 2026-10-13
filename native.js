@@ -51,7 +51,7 @@
     '</div>'+
     '<div class="native-content">'+
       '<div class="native-meta"><span class="native-match">'+Math.round(Math.min(99,Math.max(68,(item.rating||7.7)*10)))+'% Match</span>'+labels.map(function(x){return '<span>'+esc(x)+'</span>';}).join("")+'</div>'+
-      '<div class="native-primary-actions"><button class="native-main-play" data-native-play>'+icon("play")+' Play</button><button class="native-main-download" data-native-remind>'+icon("bell")+' Remind Me</button></div>'+
+      '<div class="native-primary-actions"><button class="native-main-play" data-native-play>'+icon("play")+' Play</button><button class="native-main-download" data-native-more>'+icon("info")+' '+(item.type==="tv"?"View Episodes":"More Like This")+'</button></div>'+
       '<div class="native-synopsis">'+esc(item.overview||"Discover this title.")+'</div>'+
       '<div class="native-submeta">'+(genres.length?'<span>'+esc(genres.slice(0,4).join(" • "))+'</span>':'<span>Entertainment • Immersive</span>')+'</div>'+
       '<div class="native-actions">'+
@@ -160,7 +160,7 @@
    if(el.hasAttribute("data-native-list")){toggleList();return;}
    if(el.hasAttribute("data-native-rate")){if(current){var k=titleKey(current);if(app.state.likes.has(k))app.state.likes.delete(k);else app.state.likes.add(k);app.persist();el.classList.toggle("active",app.state.likes.has(k));}return;}
    if(el.hasAttribute("data-native-share")){if(navigator.share){navigator.share({title:current.name,url:location.href}).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(current.name).catch(function(){});}return;}
-   if(el.hasAttribute("data-native-remind")){el.classList.toggle("active");el.innerHTML=icon(el.classList.contains("active")?"check":"bell")+" "+(el.classList.contains("active")?"Reminder set":"Remind Me");return;}
+   if(el.hasAttribute("data-native-more")){var target=layer.querySelector(current&&current.type==="tv"?".native-episodes":".native-related");if(target)target.scrollIntoView({behavior:"smooth",block:"start"});return;}
    if(el.dataset.nativeEpisode){play(Number(el.dataset.nativeSeason)||1,Number(el.dataset.nativeEpisode)||1);return;}
    if(el.dataset.nativeOpen){openDetails(el.dataset.nativeOpen,true);return;}
    if(el.dataset.nativeAvatar){chosenAvatar=Number(el.dataset.nativeAvatar);layer.querySelectorAll(".native-avatar-option").forEach(function(node){node.classList.toggle("selected",Number(node.dataset.nativeAvatar)===chosenAvatar);});layer.querySelector("#nativeAvatarPreview").innerHTML=sprite(chosenAvatar);return;}
