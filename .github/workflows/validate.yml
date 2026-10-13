@@ -11,6 +11,7 @@ jobs:
         run: |
           node --check app.js
           node --check mobile.js
+          node --check games.js
           node --check native.js
           node --check config.js
           node --check tests/smoke.mjs
@@ -64,6 +65,7 @@ jobs:
             mobile-profiles.png
             mobile-details.png
             mobile-newhot.png
+            mobile-games.png
             mobile-mynetflix.png
             desktop-smoke.png
             mobile-smoke.png
