@@ -32,14 +32,30 @@ try {
   await mobile.route("https://api.themoviedb.org/**", route => route.abort());
   await mobile.goto("http://127.0.0.1:8765/", { waitUntil: "domcontentloaded" });
   await mobile.locator('[data-profile="one"]').click();
-  assert(await mobile.locator("#hero").isVisible(), "Mobile hero missing");
+  assert(await mobile.locator("#mobileRoot .m-feature").isVisible(), "Mobile featured portrait card missing");
   await mobile.waitForTimeout(1200);
   await mobile.screenshot({ path: "mobile-home.png", fullPage: false });
-  await mobile.locator("#mobileBrowse").click();
-  assert(await mobile.locator("#mobileMenu").isVisible(), "Mobile browse menu missing");
-  await mobile.locator('#mobileMenu [data-nav="movie"]').click();
-  assert((await mobile.locator(".browse-grid .tile").count()) >= 1, "Mobile movie browse is empty");
+  await mobile.locator('.m-feature [data-m-add]').click();
+  await mobile.locator('[data-m-tab="my"]').click();
+  assert(await mobile.locator(".m-myn-page").isVisible(), "My Netflix tab failed");
+  assert(await mobile.locator(".m-myn-page .m-shelf").count() >= 1, "My List did not update");
+  await mobile.screenshot({ path: "mobile-mynetflix.png", fullPage: false });
+  await mobile.locator('[data-m-tab="hot"]').click();
+  assert(await mobile.locator(".m-pagehead, .m-headtitle").filter({ hasText:"New & Hot" }).count() >= 1, "New & Hot tab missing");
+  await mobile.locator('[data-m-news="watching"]').click();
+  assert(await mobile.locator(".m-release").count() >= 1, "New & Hot catalog missing");
+  await mobile.screenshot({ path: "mobile-newhot.png", fullPage: false });
+  await mobile.locator('[data-m-tab="home"]').click();
+  await mobile.locator('[data-m-action="search"]').first().click();
+  await mobile.locator("#mSearchInput").fill("Stranger");
+  assert((await mobile.locator("#mSearchResults .m-poster").count()) >= 1, "Mobile search missing");
+  await mobile.locator("#mSearchResults .m-poster").first().click();
+  assert(await mobile.locator("#detailsModal").isVisible(), "Mobile title details missing");
+  await mobile.locator("#modalPlay").click();
+  assert(await mobile.locator("#playerSetup").isVisible(), "Mobile EvanPlayer handoff missing");
+  await mobile.locator("#playerBack").click();
   await mobile.screenshot({ path: "mobile-smoke.png", fullPage: false });
+
   console.log("Desktop and mobile navigation, profiles, search, lists and player handoff passed.");
 } finally {
   await browser.close();
