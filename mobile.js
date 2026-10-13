@@ -48,7 +48,7 @@
   return unique([source.catalog.get("movie:1093971"),source.catalog.get("tv:66732"),source.catalog.get("tv:119051"),source.catalog.get("tv:93405")].concat(source.state.live.netflixTv||[],all));
  }
  function selectedFeature(){var opts=featureItems();return opts[screen.heroIndex%Math.max(opts.length,1)]||items()[0];}
- function poster(item,index,extra){var path=image(item,screen.tab==="home"?"backdrop":"poster"),tag=extra==="rank"?'<span class="m-poster-rank">'+(index+1)+'</span>':extra==="progress"?'<span class="m-mini-progress"></span>':"";
+ function poster(item,index,extra){var path=image(item,screen.tab==="home"?"backdrop":"poster"),tag=extra==="rank"?'<span class="m-poster-rank">'+(index+1)+'</span>':extra==="progress"?'<span class="m-mini-progress"></span>':screen.tab==="home"&&index<3?'<span class="m-top10-mini">TOP<br>10</span>':"";
   return '<button class="m-poster'+(extra==="rank"?" m-ranked-poster":"")+'" data-m-open="'+esc(localKey(item))+'" aria-label="Details for '+esc(item.name)+'"><span class="m-poster-placeholder">'+esc(item.name)+'</span>'+(path?'<img loading="lazy" src="'+esc(path)+'" alt="" onerror="this.style.display=&quot;none&quot;">':"")+tag+'</button>';
  }
  function shelf(title,list,extra){var set=unique(list).slice(0,20);if(!set.length)return "";return '<section class="m-shelf"><div class="m-shelf-heading"><h2>'+esc(title)+'</h2><button class="m-shelf-next" data-m-shelf="1" aria-label="Scroll '+esc(title)+'">'+icon("right")+'</button></div><div class="m-shelf-items">'+set.map(function(item,i){return poster(item,i,extra||"");}).join("")+'</div></section>';}
