@@ -115,3 +115,43 @@
  #mobileRoot .m-release-title .m-title-logo{display:block;object-fit:contain;object-position:left center;max-width:175px;max-height:62px;width:auto;height:auto}
  #mobileRoot .m-release-title:has(.m-title-logo){min-height:36px;display:flex;align-items:center}
 }
+
+@media(max-width:760px){
+ #mobileRoot .m-game-page,#mobileRoot .m-game-detail{min-height:100dvh;background:#0d0d10;color:#fff;padding-bottom:125px}
+ #mobileRoot .m-games-header{padding:48px 16px 18px;display:flex;justify-content:space-between;align-items:center}
+ #mobileRoot .m-games-header h1{margin:0;font-size:26px;letter-spacing:-.6px}
+ #mobileRoot .m-games-header img{width:18px;height:27px}
+ #mobileRoot .m-game-intro{margin:0 16px 18px;padding:11px 0}
+ #mobileRoot .m-game-kicker{font-size:10px;letter-spacing:3px;color:#aaa;font-weight:800}
+ #mobileRoot .m-game-intro h2{font-size:29px;margin:7px 0 4px;font-weight:850;letter-spacing:-.7px}
+ #mobileRoot .m-game-intro p{font-size:13px;color:#bbb;margin:0}
+ #mobileRoot .m-game-feature{position:relative;isolation:isolate;margin:0 16px 26px;border-radius:8px;height:220px;overflow:hidden;background:linear-gradient(135deg,#4c273c,#221927)}
+ #mobileRoot .m-game-feature>img{position:absolute;width:100%;height:100%;object-fit:cover;inset:0;z-index:-2}
+ #mobileRoot .m-game-feature-shade{position:absolute;inset:0;background:linear-gradient(0deg,#09090add,transparent 80%);z-index:-1}
+ #mobileRoot .m-game-feature-text{position:absolute;left:15px;right:15px;bottom:14px}
+ #mobileRoot .m-game-feature-text small{font-size:10px;letter-spacing:1.5px;font-weight:750}
+ #mobileRoot .m-game-feature-text h2{font-size:29px;line-height:1;margin:5px 0}
+ #mobileRoot .m-game-feature-text p{font-size:12px;color:#ddd;margin:0 0 10px}
+ #mobileRoot .m-game-feature-text button{background:#fff;color:#141414;font-weight:800;padding:8px 17px;border-radius:4px;border:0}
+ #mobileRoot .m-game-row{margin:0 16px}
+ #mobileRoot .m-game-row h2{font-size:19px;letter-spacing:-.3px;margin:0 0 14px}
+ #mobileRoot .m-game-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 9px}
+ #mobileRoot .m-game-card{display:flex;flex-direction:column;text-align:left;gap:5px;min-width:0;border:0;background:none;padding:0;color:#fff}
+ #mobileRoot .m-game-card b{font-size:12px;line-height:1.3}
+ #mobileRoot .m-game-card small{font-size:10px;color:#999}
+ #mobileRoot .m-game-thumb{width:100%;aspect-ratio:1.38;background:linear-gradient(130deg,#34313c,#151518);border-radius:5px;overflow:hidden}
+ #mobileRoot .m-game-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+ #mobileRoot .m-game-footnote{font-size:11px;line-height:1.5;color:#888;margin:30px 16px}
+ #mobileRoot .m-game-detail{padding-bottom:40px}
+ #mobileRoot .m-game-back{position:fixed;top:45px;left:25px;z-index:4;background:#0009;color:#fff;border:0;border-radius:50%;width:38px;height:38px;font-size:31px}
+ #mobileRoot .m-game-detail-art{height:300px;background:linear-gradient(120deg,#493644,#17171a)}
+ #mobileRoot .m-game-detail-art img{width:100%;height:100%;object-fit:cover}
+ #mobileRoot .m-game-detail-body{padding:22px 18px}
+ #mobileRoot .m-game-brand{width:18px;height:29px;vertical-align:middle}
+ #mobileRoot .m-game-type{display:inline-block;font-size:11px;letter-spacing:3px;color:#ddd;margin-left:10px}
+ #mobileRoot .m-game-detail-body h1{font-size:34px;line-height:1.1;margin:12px 0}
+ #mobileRoot .m-game-detail-body p{font-size:14px;line-height:1.6;color:#eee}
+ #mobileRoot .m-game-genre{font-size:12px!important;color:#bbb!important}
+ #mobileRoot .m-game-note{font-size:12px;color:#aaa;margin:24px 0}
+ #mobileRoot .m-game-primary{border:0;border-radius:4px;background:white;color:#111;padding:12px 20px;width:100%;font-weight:800}
+}
