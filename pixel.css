@@ -159,3 +159,15 @@
  #mobileRoot .m-top10-mini{position:absolute;top:0;right:6px;background:#e50914;color:#fff;font-size:8px;font-weight:900;line-height:.95;letter-spacing:-.2px;padding:2px 3px;z-index:3;box-shadow:0 1px 2px #0008}
  #mobileRoot .m-top10-mini:after{content:"";position:absolute;left:0;right:0;top:100%;border-left:10px solid #e50914;border-right:10px solid #e50914;border-bottom:4px solid transparent;z-index:-1}
 }
+
+@media(max-width:760px){
+ #mobileRoot .m-game-thumb{position:relative;display:block}
+ #mobileRoot .m-game-thumb-fallback{position:absolute;inset:0;display:flex;justify-content:center;align-items:center;padding:12px;text-align:center;font-size:clamp(15px,4vw,22px);font-weight:900;line-height:1.03;letter-spacing:-.6px;color:#fff}
+ #mobileRoot .m-game-thumb img{position:absolute;inset:0;z-index:1}
+ #mobileRoot .m-game-card:nth-child(1) .m-game-thumb{background:#48283b}
+ #mobileRoot .m-game-card:nth-child(2) .m-game-thumb{background:#2b3b45}
+ #mobileRoot .m-game-card:nth-child(3) .m-game-thumb{background:#3b4637}
+ #mobileRoot .m-game-card:nth-child(4) .m-game-thumb{background:#2a3d49}
+ #mobileRoot .m-game-card:nth-child(5) .m-game-thumb{background:#424036}
+ #mobileRoot .m-game-card:nth-child(6) .m-game-thumb{background:#433b51}
+}
