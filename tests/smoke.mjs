@@ -67,6 +67,14 @@ try {
   assert(await mobile.locator(".m-myn-page").isVisible(), "My Netflix tab failed");
   assert(await mobile.locator(".m-myn-page .m-shelf").count() >= 1, "My List did not update");
   await mobile.screenshot({ path: "mobile-mynetflix.png", fullPage: false });
+  await mobile.locator('[data-m-tab="games"]').click();
+  assert(await mobile.locator(".m-game-page").isVisible(), "Games tab must be a real browsing screen");
+  assert(await mobile.locator("[data-m-game]").count() >= 4, "Games catalog tiles missing");
+  await mobile.locator('[data-m-game="hades"]').first().click();
+  assert(await mobile.locator(".m-game-detail").isVisible(), "Game details should open");
+  await mobile.locator('[data-m-action="gamesBack"]').first().click();
+  assert(await mobile.locator(".m-game-page").isVisible(), "Game back navigation failed");
+  await mobile.screenshot({ path:"mobile-games.png", fullPage:false });
   await mobile.locator('[data-m-tab="hot"]').click();
   assert(await mobile.locator(".m-pagehead, .m-headtitle").filter({ hasText:"New & Hot" }).count() >= 1, "New & Hot tab missing");
   await mobile.locator('[data-m-news="watching"]').click();
