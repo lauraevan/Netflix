@@ -4,7 +4,7 @@
  var source=window.NetflixUI, root=document.getElementById("mobileRoot");
  if(!source||!root)return;
  var screen={tab:"home",filter:"all",news:"coming",search:"",heroIndex:0,upcoming:[],ready:false,gameTab:"mobile"};
- var spotlight={id:1093971,type:"movie",name:"Srikanth",year:2024,age:"TV-14",rating:7.6,language:"hi",genres:"Inspiring, Drama, Based on Real Life",poster:"",backdrop:"",overview:"A visually impaired man overcomes extraordinary obstacles in education and business in this inspiring true story.",featureImage:"https://images.fandango.com/ImageRenderer/0/0/redesign/static/img/default_poster--dark-mode.png/0/images/masterrepository/Fandango/236011/SRI_Poster03copylowres.jpg"}; 
+ var spotlight={id:1093971,type:"movie",name:"Srikanth",year:2024,age:"TV-14",rating:7.6,language:"hi",genres:"Inspiring, Drama, Based on Real Life",poster:"",backdrop:"",overview:"A visually impaired man overcomes extraordinary obstacles in education and business in this inspiring true story.",featureImage:"assets/srikanth-reference.webp"}; 
  source.addItems([spotlight]);
  var IMG="https://image.tmdb.org/t/p/";
  var $=function(id){return document.getElementById(id);};
