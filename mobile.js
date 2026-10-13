@@ -7,6 +7,32 @@
  var spotlight={id:1093971,type:"movie",name:"Srikanth",year:2024,age:"TV-14",rating:7.6,language:"hi",genres:"Inspiring, Drama, Based on Real Life",poster:"",backdrop:"",overview:"A visually impaired man overcomes extraordinary obstacles in education and business in this inspiring true story.",featureImage:"assets/srikanth-reference.webp"}; 
  source.addItems([spotlight]);
  var IMG="https://image.tmdb.org/t/p/";
+ var logoCache=new Map(), logoPending=new Set();
+ function decorateReleaseLogos(){
+  if(screen.tab!=="hot")return;
+  Array.from(root.querySelectorAll("[data-title-logo]")).slice(0,4).forEach(function(node){
+    var id=node.dataset.titleLogo,media=source.catalog.get(id);
+    if(!media)return;
+    if(logoCache.has(id)){
+      var url=logoCache.get(id);
+      if(url)node.innerHTML='<img class="m-title-logo" alt="'+esc(media.name)+'" src="'+esc(url)+'" onerror="this.style.display=&quot;none&quot;">';
+      return;
+    }
+    if(logoPending.has(id))return;
+    logoPending.add(id);
+    source.api("/"+media.type+"/"+media.id+"/images?include_image_language=en,null")
+      .then(function(data){
+        var logos=(data.logos||[]).filter(function(x){return x.file_path&&x.iso_639_1==="en"&&x.file_path.endsWith(".png");});
+        logos.sort(function(a,b){return (b.vote_average||0)-(a.vote_average||0);});
+        logoCache.set(id,logos.length?source.safeImage(logos[0].file_path,"w500"):"");
+        if(screen.tab==="hot"){
+          var current=root.querySelector('[data-title-logo="'+id+'"]');
+          if(current&&logoCache.get(id))current.innerHTML='<img class="m-title-logo" alt="'+esc(media.name)+'" src="'+esc(logoCache.get(id))+'" onerror="this.style.display=&quot;none&quot;">';
+        }
+      }).catch(function(){logoCache.set(id,"");}).finally(function(){logoPending.delete(id);});
+  });
+ }
+
  var $=function(id){return document.getElementById(id);};
  function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
  function icon(name){return '<svg class="icon" aria-hidden="true"><use href="#'+name+'"/></svg>';}
@@ -67,7 +93,7 @@
    var remindKey=localKey(item),reminders=new Set(readReminders()),remind=reminders.has(remindKey);
    return '<article class="m-release"><div class="m-release-date">'+esc(mon)+'<strong>'+esc(day)+'</strong></div><div>'+
      '<button class="m-release-cover" data-m-open="'+esc(remindKey)+'" aria-label="View '+esc(item.name)+'"><span class="m-trailer-placeholder">'+esc(item.name)+'</span><img class="m-preview-n" src="assets/netflix-n.svg" alt=""><span class="m-trailer-label">PREVIEW</span>'+(cover||posterCover?'<img src="'+esc(cover||posterCover)+'" data-fallback="'+esc(posterCover)+'" loading="lazy" alt="" onerror="this.onerror=null;this.dataset.fallback?this.src=this.dataset.fallback:this.style.display=&quot;none&quot;">':"")+'<span class="m-trailer-play">'+icon("play")+'</span></button>'+
-     '<div class="m-release-details"><div class="m-release-title-row"><h2 class="m-release-title">'+esc(item.name)+'</h2><div class="m-release-actions"><button class="m-small-action" data-m-remind="'+esc(remindKey)+'">'+icon(remind?"check":"bell")+'<span>'+(remind?"Reminded":"Remind Me")+'</span></button><button class="m-small-action" data-m-open="'+esc(remindKey)+'">'+icon("info")+'<span>Info</span></button></div></div>'+
+     '<div class="m-release-details"><div class="m-release-title-row"><h2 class="m-release-title" data-title-logo="'+esc(remindKey)+'">'+esc(item.name)+'</h2><div class="m-release-actions"><button class="m-small-action" data-m-remind="'+esc(remindKey)+'">'+icon(remind?"check":"bell")+'<span>'+(remind?"Reminded":"Remind Me")+'</span></button><button class="m-small-action" data-m-open="'+esc(remindKey)+'">'+icon("info")+'<span>Info</span></button></div></div>'+
      '<p class="m-release-soon">'+esc(subtitle)+'</p><p class="m-release-overview">'+esc((item.overview||"").slice(0,225))+'</p><p class="m-release-tags">'+esc(item.type==="tv"?"Series":"Film")+' · '+esc(item.language||"English")+' · '+esc(item.year||"Netflix")+'</p></div></div></article>';
   }).join("");
   var empty=screen.news==="coming"&&!screen.ready?'Loading upcoming titles…':"No titles available right now.";
@@ -102,6 +128,7 @@
   root.innerHTML=main+tabs();
   if(screen.tab==="home"&&screen.categories){root.querySelector(".m-filterbar").insertAdjacentHTML("afterend",categorySheet());}
   if(screen.tab==="search"){var input=$("mSearchInput");input.value=screen.search;searchResults();}
+  if(screen.tab==="hot")decorateReleaseLogos();
  }
  function setTab(tab){screen.tab=tab;screen.categories=false;render();window.scrollTo({top:0,behavior:"instant"});}
  root.addEventListener("click",function(event){
