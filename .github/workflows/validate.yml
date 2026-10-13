@@ -13,6 +13,17 @@ jobs:
           node --check mobile.js
           node --check config.js
           node --check tests/smoke.mjs
+      - name: Check GitHack beta address
+        run: |
+          URL="https://raw.githack.com/lauraevan/Netflix/main/index.html"
+          STATUS=$(curl --max-time 30 -L -sS -o /tmp/netflix-githack.html -w "%{http_code}" "$URL" || true)
+          echo "GitHack status: $STATUS"
+          if [ "$STATUS" = "200" ]; then
+            grep -q '<title>Netflix</title>' /tmp/netflix-githack.html
+            echo "Verified GitHack is serving the Netflix app."
+          else
+            echo "GitHack may need time to refresh, or access is temporarily unavailable."
+          fi
       - name: Check referenced HTML IDs
         run: |
           python3 - <<'PY'
