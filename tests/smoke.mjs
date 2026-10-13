@@ -42,6 +42,12 @@ try {
   await mobile.locator("#manageProfiles").click();
   await mobile.locator('[data-profile="one"]').click();
   assert(await mobile.locator("#mobileRoot .m-feature").isVisible(), "Mobile featured portrait card missing");
+  assert(await mobile.locator('.m-feature').getAttribute('aria-label') === 'Featured: Srikanth', "Reference featured title should be Srikanth");
+  assert((await mobile.locator('img.m-netflix-n').count())===1, "Use the local Netflix N vector, not an italic text substitute");
+  const posterLoaded = await mobile.locator('.m-feature-img').evaluate(img => img.complete && img.naturalWidth > 0).catch(()=>false);
+  console.log("Reference portrait artwork loaded:",posterLoaded);
+  await mobile.screenshot({ path: "mobile-reference.png", fullPage: false });
+
   await mobile.waitForTimeout(1200);
   await mobile.screenshot({ path: "mobile-home.png", fullPage: false });
   await mobile.locator('.m-feature [data-m-add]').click();
