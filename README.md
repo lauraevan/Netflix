@@ -31,13 +31,16 @@ A static preview does not include the FastAPI media resolver. The EvanPlayer bac
 
 TMDB provides artwork, discovery and episode metadata. config.js currently reuses the existing EvanPlayer metadata API key. Client-side keys are visible to anyone who can view a deployment; production should proxy metadata requests through a server.
 
-## Private GitHub and GitHack
+## GitHack beta
 
-The repository is private. GitHack only serves publicly accessible files, and therefore cannot open its contents. The following URL is the intended GitHack preview route once the static frontend is published to a public mirror or this repository becomes public:
+The GitHub repository is **currently public**, so GitHack can serve the static application directly:
 
 https://raw.githack.com/lauraevan/Netflix/main/index.html
 
-Do not interpret that URL as an active preview while the repository remains private. To preserve repo privacy, preview locally or use an authenticated preview server.
+This is a browser app, not a server deployment. GitHack serves index.html, styles.css, mobile.css, app.js, mobile.js, and config.js; EvanPlayer's Python backend is not included and must be configured separately when pressing Play. On iPhone or Android the UI is the screenshot-reference mobile layout; larger screens use the desktop Netflix-inspired browsing interface.
+
+If this repository becomes private again, the GitHack URL stops working. Keep the backend, any signing secrets, and all non-public code out of public static frontend hosting.
+
 
 ## QA
 
