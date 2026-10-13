@@ -110,3 +110,8 @@
   #mobileRoot .m-tab.active .icon{stroke-width:2.1}
   #mobileRoot .m-page-home .m-poster-rank{font-weight:900}
 }
+
+@media(max-width:760px){
+ #mobileRoot .m-release-title .m-title-logo{display:block;object-fit:contain;object-position:left center;max-width:175px;max-height:62px;width:auto;height:auto}
+ #mobileRoot .m-release-title:has(.m-title-logo){min-height:36px;display:flex;align-items:center}
+}
