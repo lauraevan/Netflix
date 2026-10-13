@@ -26,3 +26,15 @@
 .wordmark:has(.wordmark-image:not([hidden])){font-size:0;letter-spacing:0;transform:none}
 .wordmark .wordmark-image{position:static;inset:auto;width:112px;height:auto;max-height:34px;object-fit:contain;object-position:left center}
 .profiles-brand.wordmark .wordmark-image{width:130px;max-height:43px}
+
+/* Supplied character avatars, bundled as one optimized 7-frame sprite. */
+.avatar.avatar-art,.m-avatar.avatar-art{
+ background-image:url("./assets/profile-sprite.webp");
+ background-size:700% 100%;
+ background-repeat:no-repeat;
+ background-color:#111;
+ border-radius:5px;
+ display:inline-block;
+ flex-shrink:0;
+}
+.avatar.avatar-art svg,.m-avatar.avatar-art svg{display:none}
