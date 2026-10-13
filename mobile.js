@@ -72,7 +72,7 @@
  function myNetflix(){var watched=source.state.recent.map(function(k){return source.catalog.get(k);}).filter(Boolean),favorites=Array.from(source.state.lists).map(function(k){return source.catalog.get(k);}).filter(Boolean);
  return '<div class="m-page m-myn-page"><div class="m-myn-top"><span class="m-myn-title">My Netflix</span><div class="m-headright"><button class="m-header-btn" data-m-action="search" aria-label="Search">'+icon("search")+'</button><button class="m-header-btn" data-m-action="changeProfile" aria-label="Manage profiles">'+icon("pencil")+'</button></div></div>'+
  '<div class="m-myn-profile">'+face()+'<div><b>'+esc(profile().name)+'</b><p>Switch profiles and manage your favorites</p></div></div>'+
- '<button class="m-service-row" data-m-action="notification"><span class="m-service-icon">'+icon("bell")+'</span><span><b>Notifications</b><small>You're all caught up</small></span></button>'+
+ '<button class="m-service-row" data-m-action="notification"><span class="m-service-icon">'+icon("bell")+'</span><span><b>Notifications</b><small>You are all caught up</small></span></button>'+
  '<button class="m-service-row" data-m-action="mylist"><span class="m-service-icon">'+icon("check")+'</span><span><b>My List</b><small>'+favorites.length+' saved titles</small></span></button>'+
  (watched.length?shelf("Continue Watching",watched,"progress"):"")+
  (favorites.length?shelf("My List",favorites):'<div class="m-empty">Add shows and movies to My List to find them here.</div>')+
