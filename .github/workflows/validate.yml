@@ -60,6 +60,7 @@ jobs:
           path: |
             desktop-home.png
             mobile-home.png
+            mobile-reference.png
             mobile-profiles.png
             mobile-details.png
             mobile-newhot.png
