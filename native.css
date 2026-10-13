@@ -4,7 +4,7 @@
  html,body{min-height:100dvh;background:#0a0a0b}
  body.native-open{overflow:hidden;touch-action:pan-y}
  #mobileRoot{background:#0b0b0d!important}
- .native-layer:not([hidden]){display:block;position:fixed;inset:0;z-index:160;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;background:#101011;color:white;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .native-layer:not([hidden]){display:block;position:fixed;inset:0;z-index:260;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;background:#101011;color:white;scrollbar-width:none;-webkit-overflow-scrolling:touch}
  .native-layer::-webkit-scrollbar{display:none}
  .native-screen{min-height:100dvh;background:#101011;animation:native-enter .24s cubic-bezier(.21,.75,.3,1) both}
  @keyframes native-enter{from{transform:translateY(19px);opacity:.82}to{transform:none;opacity:1}}
