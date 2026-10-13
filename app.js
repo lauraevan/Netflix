@@ -64,7 +64,7 @@
     output+=rail("Popular on Netflix",live.trending||all);
     output+=rail("Trending Now",live.popular||all.slice().reverse());
     output+=rail("Top 10 Series in the U.S. Today",live.tv||tv,true);
-    output+=rail("Only on Netflix",live.netflixTv||tv);
+    output+=rail(live.netflixTv?"Only on Netflix":"Binge-Worthy Series",live.netflixTv||tv);
     output+=rail("Top 10 Movies in the U.S. Today",live.movies||movies,true);
     output+=rail("Critically Acclaimed",live.top||all);
     if(listed.length)output+=rail("My List",listed);
