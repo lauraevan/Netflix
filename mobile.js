@@ -119,7 +119,7 @@
  (favorites.length?shelf("My List",favorites):'<div class="m-empty">Add shows and movies to My List to find them here.</div>')+
  shelf("Recommended for You",items().slice(0,15))+'</div>';
  }
- function games(){return '<div class="m-page m-tabpage">'+topHeader("Games")+'<div class="m-empty" style="padding:80px 28px"><strong style="display:block;color:#fff;font-size:23px;margin-bottom:14px">Netflix Games</strong>Games are not part of this browser beta yet. Home, New & Hot, My Netflix, and EvanPlayer are ready to explore.</div></div>';}
+ function games(){return window.NetflixGames ? window.NetflixGames.render(screen.gameDetail) : "";}
  function searchPage(){return '<div class="m-page m-search-page"><div class="m-search-form"><label class="m-search-wrap">'+icon("search")+'<input id="mSearchInput" type="search" autocomplete="off" placeholder="Search games, shows, movies" aria-label="Search Netflix"></label><button class="m-search-cancel" data-m-action="searchBack">Cancel</button></div><h2 class="m-search-heading">Top Searches</h2><div id="mSearchResults"></div></div>';}
  function searchResults(){var x=$("mSearchResults");if(!x)return;var query=screen.search.trim().toLowerCase();var found=items().filter(function(item){return !query||(item.name+" "+item.overview+" "+item.genres).toLowerCase().includes(query);}).slice(0,60);
  x.innerHTML=found.length?'<div class="m-grid">'+found.map(function(item,i){return poster(item,i,"");}).join("")+'</div>':'<div class="m-empty">No matches found. Try another title.</div>';}
@@ -130,12 +130,14 @@
   if(screen.tab==="search"){var input=$("mSearchInput");input.value=screen.search;searchResults();}
   if(screen.tab==="hot")decorateReleaseLogos();
  }
- function setTab(tab){screen.tab=tab;screen.categories=false;render();window.scrollTo({top:0,behavior:"instant"});}
+ function setTab(tab){screen.tab=tab;screen.gameDetail=null;screen.categories=false;render();window.scrollTo({top:0,behavior:"instant"});}
  root.addEventListener("click",function(event){
-   var el=event.target.closest("button[data-m-tab],button[data-m-action],button[data-m-filter],button[data-m-open],button[data-m-play],button[data-m-add],button[data-m-news],button[data-m-remind],button[data-m-shelf]");
+   var el=event.target.closest("button[data-m-tab],button[data-m-action],button[data-m-filter],button[data-m-open],button[data-m-play],button[data-m-add],button[data-m-news],button[data-m-remind],button[data-m-shelf],button[data-m-game]");
    if(!el||!root.contains(el))return;
    var d=el.dataset;
    if(d.mTab){setTab(d.mTab);return;}
+   if(d.mGame){screen.gameDetail=d.mGame;render();window.scrollTo(0,0);return;}
+   if(d.mAction==="gamesBack"){screen.gameDetail=null;render();window.scrollTo(0,0);return;}
    if(d.mOpen){source.openModal(d.mOpen);return;}
    if(d.mPlay){source.startPlayback(source.catalog.get(d.mPlay));return;}
    if(d.mAdd){var list=source.state.lists,k=d.mAdd;if(list.has(k))list.delete(k);else list.add(k);source.persist();render();return;}
