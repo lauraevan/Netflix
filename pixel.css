@@ -103,3 +103,10 @@
  #mobileRoot .m-feature-title{font-size:27px}
 }
 @media(min-width:761px){#mobileRoot{display:none!important}}
+
+@media(max-width:760px){
+  #mobileRoot .m-bottom{align-items:start;}
+  #mobileRoot .m-tab{justify-content:flex-start!important;align-items:center;gap:4px;padding:0}
+  #mobileRoot .m-tab.active .icon{stroke-width:2.1}
+  #mobileRoot .m-page-home .m-poster-rank{font-weight:900}
+}
