@@ -39,6 +39,9 @@ try {
   await mobile.locator('[data-native-avatar="4"]').click();
   await mobile.locator("#nativeProfileName").fill("Evan");
   await mobile.locator("[data-native-save]").click();
+  await mobile.locator('[data-profile="one"]').click();
+  await mobile.locator('[data-native-avatar="0"]').click();
+  await mobile.locator("[data-native-save]").click();
   await mobile.locator("#manageProfiles").click();
   await mobile.locator('[data-profile="one"]').click();
   assert(await mobile.locator("#mobileRoot .m-feature").isVisible(), "Mobile featured portrait card missing");
