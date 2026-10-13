@@ -43,13 +43,13 @@
  var nav='<div class="m-filterbar"><button class="m-filter'+(screen.filter==="tv"?" active":"")+'" data-m-filter="tv">TV Shows</button><button class="m-filter'+(screen.filter==="movie"?" active":"")+'" data-m-filter="movie">Movies</button><button class="m-filter" data-m-action="categories">Categories '+icon("down")+'</button></div>';
  var card='<div class="m-feature" aria-label="Featured: '+esc(feature.name)+'"><div class="m-feature-backup"></div>'+(featPoster?'<img class="m-feature-img" src="'+esc(featPoster)+'" alt="" fetchpriority="high" onerror="this.style.display=&quot;none&quot;">':"")+
  '<div class="m-feature-top"><span class="m-redn">N</span>'+(feature.type==="tv"?"SERIES":"FILM")+'</div>'+
- '<div class="m-feature-bottom"><h1 class="m-feature-title">'+esc(feature.name)+'</h1><div class="m-feature-rank"><span class="m-rank-symbol">TOP<br>10</span> #'+(screen.heroIndex+1)+' in '+(feature.type==="tv"?"TV Shows":"Movies")+' Today</div><p class="m-feature-tags">'+tags.map(esc).join('<b>•</b>')+'</p>'+
+ '<div class="m-feature-bottom">'+(source.state.heroLogo&&source.state.hero&&localKey(feature)===localKey(source.state.hero)?'<img class="m-feature-logo" src="'+esc(source.state.heroLogo)+'" alt="'+esc(feature.name)+'">':'<h1 class="m-feature-title">'+esc(feature.name)+'</h1>')+<div class="m-feature-rank"><span class="m-rank-symbol">TOP<br>10</span> #'+(screen.heroIndex+1)+' in '+(feature.type==="tv"?"TV Shows":"Movies")+' Today</div><p class="m-feature-tags">'+tags.map(esc).join('<b>•</b>')+'</p>'+
  '<div class="m-feature-actions"><button class="m-cta m-cta-play" data-m-play="'+esc(localKey(feature))+'">'+icon("play")+' Play</button><button class="m-cta m-cta-list" data-m-add="'+esc(localKey(feature))+'">'+icon(isListed?"check":"plus")+' My List</button></div></div></div>';
  var indicators='<div class="m-feature-indicators">'+[0,1,2,3,4].map(function(i){return '<i class="'+(screen.heroIndex%5===i?"active":"")+'"></i>';}).join("")+'</div>';
- var shown=screen.filter==="tv"?shows:screen.filter==="movie"?movies:curated;
+ var shown=screen.filter==="tv"?shows:screen.filter==="movie"?movies:screen.filter==="korean"?curated.filter(function(x){return x.language==="ko";}):screen.filter==="spanish"?curated.filter(function(x){return x.language==="es";}):screen.filter==="anime"?curated.filter(function(x){return /animation|anime/i.test(x.genres||"");}):curated;
  var blocks=shelf("Your Next Watch",shown)+shelf("Trending Now",source.state.live.trending||curated)+shelf("Top 10 in the U.S. Today",source.state.live.tv||shows,"rank");
  if(continueItems.length)blocks+=shelf("Continue Watching for "+profile().name,continueItems,"progress");
- blocks+=shelf("Only on Netflix",source.state.live.netflixTv||shows)+shelf("Popular Films",source.state.live.movies||movies);
+ blocks+=shelf(source.state.live.netflixTv?"Only on Netflix":"Series to Binge",source.state.live.netflixTv||shows)+shelf("Popular Films",source.state.live.movies||movies);
  return '<div class="m-page m-page-home">'+topHeader("")+'<div class="m-header" style="padding-top:0">'+nav+'</div>'+card+indicators+'<div class="m-content">'+blocks+'</div></div>';
  }
  function releaseDate(item){var date=item.release_date||item.first_air_date||"";if(!/^\d{4}-\d\d-\d\d$/.test(date))return null;var d=new Date(date+"T12:00:00Z");return Number.isNaN(d.getTime())?null:d;}
