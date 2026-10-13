@@ -10,6 +10,7 @@ jobs:
       - name: Check JavaScript syntax
         run: |
           node --check app.js
+          node --check mobile.js
           node --check config.js
           node --check tests/smoke.mjs
       - name: Check referenced HTML IDs
@@ -47,6 +48,8 @@ jobs:
           path: |
             desktop-home.png
             mobile-home.png
+            mobile-newhot.png
+            mobile-mynetflix.png
             desktop-smoke.png
             mobile-smoke.png
           if-no-files-found: ignore
