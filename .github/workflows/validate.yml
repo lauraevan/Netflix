@@ -11,6 +11,7 @@ jobs:
         run: |
           node --check app.js
           node --check config.js
+          node --check tests/smoke.mjs
       - name: Check referenced HTML IDs
         run: |
           python3 - <<'PY'
@@ -23,3 +24,27 @@ jobs:
           assert not missing, f'IDs referenced but absent in HTML: {sorted(missing)}'
           print(f'Validated {len(queried)} DOM ID references.')
           PY
+  browser-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install headless browser
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Start static frontend
+        run: python3 -m http.server 8765 >/tmp/netflix-http.log 2>&1 &
+      - name: Exercise desktop and mobile interface
+        run: node tests/smoke.mjs
+      - name: Store screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-smoke-screenshots
+          path: |
+            desktop-smoke.png
+            mobile-smoke.png
+          if-no-files-found: ignore
