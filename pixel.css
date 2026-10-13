@@ -1,0 +1,106 @@
+/* 2026 reference-locked mobile shell.
+   Measurements taken from the supplied 390x835 Netflix mobile screenshot.
+   One cohesive final layer replaces previous conflicting mobile geometry. */
+@media(max-width:760px){
+  html,body{background:#09090b!important}
+  #mobileRoot{
+    width:calc(100% - 28px);
+    max-width:390px;
+    min-height:100dvh;
+    margin:0 auto;
+    background:#101013!important;
+    contain:paint;
+  }
+  #mobileRoot .m-page-home{
+    background:linear-gradient(180deg,#4b234a 0,#431d43 105px,#351d37 292px,#29192d 500px,#27172b 665px,#19131d 890px,#101013 1160px,#101013 100%);
+  }
+  #mobileRoot .m-header{padding:47px 16px 0}
+  #mobileRoot .m-headrow{height:45px}
+  #mobileRoot .m-wordmark{height:36px;width:23px}
+  #mobileRoot .m-netflix-n{width:20px;height:34px}
+  #mobileRoot .m-filterheader{padding:0 16px!important}
+  #mobileRoot .m-filterbar{margin:10px 0 15px;gap:8px;height:32px}
+  #mobileRoot .m-filter{height:31px;min-height:31px;font-size:12px;font-weight:500;padding:0 12px;background:transparent;border-color:#b2a4b5a6}
+  #mobileRoot .m-feature{
+    height:calc((100vw - 68px)*1.46);
+    max-height:535px;
+    min-height:0;
+    margin-left:17px;
+    margin-right:23px;
+    border-radius:10px;
+    border:1px solid #a4a0aa8a;
+    background:#37263b;
+  }
+  #mobileRoot .m-feature-backup{background:linear-gradient(180deg,#623f54,#4c3548 55%,#2f2135 74%,#1d1723)}
+  #mobileRoot .m-feature:before{background:linear-gradient(0deg,rgba(20,14,23,.88) 0,rgba(31,19,35,.55) 18%,transparent 45%)}
+  #mobileRoot .m-feature-img{
+    display:block;
+    position:absolute;
+    inset:0 auto auto 0;
+    width:100%;
+    height:73%;
+    object-fit:fill;
+    transform:none;
+    object-position:center top;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 87%,rgba(0,0,0,.8) 92%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 0%,#000 87%,rgba(0,0,0,.8) 92%,transparent 100%);
+  }
+  #mobileRoot .m-feature[aria-label*="Srikanth"] .m-feature-img{
+    height:74%;
+    object-fit:fill;
+    transform:none;
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 86%,rgba(0,0,0,.88) 92%,transparent 100%);
+    mask-image:linear-gradient(to bottom,#000 0%,#000 86%,rgba(0,0,0,.88) 92%,transparent 100%);
+  }
+  #mobileRoot .m-feature-bottom{bottom:11px;left:13px;right:13px}
+  #mobileRoot .m-feature-title{font-family:Georgia,"Times New Roman",serif;font-weight:750;font-size:31px;letter-spacing:7px;line-height:1.05;margin:0 0 9px;text-shadow:0 2px 5px #08060a8c;-webkit-text-stroke:0}
+  #mobileRoot .m-feature[aria-label*="Srikanth"] .m-feature-title{font-family:Georgia,"Times New Roman",serif;font-size:31px;font-weight:750;letter-spacing:7px}
+  #mobileRoot .m-feature-rank{margin:0 0 19px;font-size:10px;line-height:1.25}
+  #mobileRoot .m-rank-symbol{font-size:8px;padding:1px 2px}
+  #mobileRoot .m-feature-actions{gap:12px}
+  #mobileRoot .m-cta{height:34px;min-height:34px;gap:5px;border-radius:3px;font-size:13px;font-weight:670}
+  #mobileRoot .m-cta svg{height:18px;width:18px}
+  #mobileRoot .m-cta-list{background:rgba(83,68,82,.78)}
+  #mobileRoot .m-content{padding-top:23px}
+  #mobileRoot .m-shelf-heading{margin:0 11px 8px}
+  #mobileRoot .m-shelf h2{font-size:17px;font-weight:760}
+  #mobileRoot .m-shelf-items{padding:0 11px 5px;gap:4px}
+  #mobileRoot .m-page-home .m-poster{
+    flex:0 0 105px;
+    width:105px;
+    min-height:82px;
+    height:82px;
+    border-radius:2px;
+  }
+  #mobileRoot .m-page-home .m-poster img{
+    width:100%;height:82px;object-fit:cover;object-position:center 25%;
+  }
+  #mobileRoot .m-page-home .m-ranked-poster{flex-basis:128px;width:128px;padding-left:26px;overflow:visible}
+  #mobileRoot .m-page-home .m-ranked-poster .m-poster-rank{font-size:85px}
+  #mobileRoot .m-bottom{
+    left:50%;right:auto;transform:translateX(-50%);
+    width:calc(100% - 28px);max-width:390px;
+    height:calc(98px + env(safe-area-inset-bottom,0px));
+    min-height:98px;
+    padding-top:8px;
+    padding-bottom:calc(15px + env(safe-area-inset-bottom,0px));
+    background:linear-gradient(0deg,#101011 83%,rgba(16,16,17,.93));
+    border-top:0;
+    box-shadow:none;
+  }
+  #mobileRoot .m-tab{gap:4px;justify-content:center;font-size:10px}
+  #mobileRoot .m-tab .icon{width:24px;height:24px}
+  #mobileRoot .m-tab .m-avatar{width:24px;height:24px}
+  #mobileRoot .m-tab.active:before{display:none}
+  #mobileRoot .m-tabpage .m-header{padding:47px 16px 0}
+  #mobileRoot .m-tabpage .m-headtitle{font-size:20px;font-weight:750}
+  #mobileRoot .m-tabpage .m-subtabs{padding:0 13px 12px}
+  #mobileRoot .m-release{margin:0 10px 26px 8px}
+  #mobileRoot .m-release-cover{aspect-ratio:1.72}
+  #mobileRoot .m-release-overview{line-height:1.52}
+}
+@media(max-width:375px){
+ #mobileRoot .m-feature{height:calc((100vw - 65px)*1.46);margin-right:18px}
+ #mobileRoot .m-feature-title{font-size:27px}
+}
+@media(min-width:761px){#mobileRoot{display:none!important}}
